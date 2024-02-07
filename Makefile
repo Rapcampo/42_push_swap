@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/07 09:38:27 by rapcampo          #+#    #+#              #
+#    Updated: 2024/02/07 09:38:30 by rapcampo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= push_swap
 CC	= gcc
 FLAGS	= -Wall -Werror -Wextra
@@ -24,7 +36,9 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJS): $(SOURCE)
+	mkdir -p objs
 	$(CC) $(FLAGS) -c $(SOURCE)
+	mv *.o objs/
 
 clean:
 	$(RM) $(OBJS)
