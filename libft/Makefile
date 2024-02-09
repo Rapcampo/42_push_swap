@@ -5,6 +5,7 @@ SRCS	=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 BONUS_SRCS	=	ft_lstnew.c ft_lstsize.c ft_lstadd_front.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 BONUS_OBJS	=	$(BONUS_SRCS:.c=.o)
 OBJS	= $(SRCS:.c=.o)
+HEADERS = ../includes/
 
 RM	= rm -f
 LIBC	= ar -rcs
@@ -12,7 +13,7 @@ LIBC	= ar -rcs
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(LIBC) $(NAME) $(OBJS)
+	 $(LIBC) $(NAME) $(OBJS) -I $(HEADERS)
 
 clean:
 	$(RM) $(OBJS) $(BONUS_OBJS)
@@ -23,6 +24,9 @@ fclean: clean
 re: fclean all
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	$(LIBC) $(NAME) $(OBJS) $(BONUS_OBJS)
+	$(LIBC) $(NAME) $(OBJS) $(BONUS_OBJS) -I $(HEADERS)
+
+	
+.SILENT:
 
 .PHONY: all clean fclean re bonus

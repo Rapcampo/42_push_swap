@@ -22,6 +22,7 @@ typedef enum operations
 {
 	SA,
 	SB,
+	SS,
 	PA,
 	PB,
 	RA,

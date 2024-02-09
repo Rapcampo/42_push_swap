@@ -10,50 +10,72 @@
 #                                                                              #
 # **************************************************************************** #
 
+# ================================= Files ======================================
+
 NAME	= push_swap
-CC	= gcc
-FLAGS	= -Wall -Werror -Wextra
 LIBFT	= libft/libft.a
+SOURCE	= srcs/*.c
+OBJS	= objs/*.o
+
+# ============================ Folder Structures ===============================
+
+HEADERS		= includes/
+SOURCE_DIR	= srcs/
 LIBFT_DIR	= libft/
-SOURCE	= *.c
-OBJS	= $(SOURCE:.c=.o)
-RM = rm -rf
+OBJS_DIR	= objs/
 
-# ansi escape codes
+# ============================ Commands & Flags ===============================
 
-UNDERLINE = \e[4m
-BLINK = \e[5m
-GREEN = \e[92m
-RESET = \e[0m
+CC			= cc
+RM			= rm -rf
+AR			= ar -rcs
+FLAGS		= -Wall -Werror -Wextra
+MAKE_FLAG	= --no-print-directory
+
+# =========================== Ansi Escape Codes ================================
+
+ULINE	= \e[4m
+BLINK	= \e[5m
+BLACK 	= \e[1;30m
+RED 	= \e[1;31m
+GREEN 	= \e[1;32m
+YELLOW 	= \e[1;33m
+BLUE	= \e[1;34m
+PURPLE 	= \e[1;35m
+CYAN 	= \e[1;36m
+WHITE 	= \e[1;37m
+RESET	= \e[0m
+
+# ================================ Rules =======================================
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
-	@echo "\n*************************$(GREEN)$(BLINK)    [Compilation Sucessfull!]    $(RESET)*************************\n"
+$(NAME): $(OBJS)
+	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
+	make $(MAKE_FLAG) -C $(LIBFT_DIR)
+	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -I $(HEADERS)
+	echo "\n*************************$(GREEN)$(BLINK)    [Compilation Sucessfull!]    $(RESET)*************************\n"
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
-
-$(OBJS): $(SOURCE)
+$(OBJS): 
+	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)sources$(RESET)"
 	mkdir -p objs
-	$(CC) $(FLAGS) -c $(SOURCE)
-	mv *.o objs/
+	$(CC) $(FLAGS) -c $(SOURCE) -I $(HEADERS)
+	mv *.o $(OBJS_DIR)
 
 clean:
+	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	@echo "\n*************************$(BLINK)$(GREEN)    [Success!]    $(RESET)*************************\n"
-	@echo "$(UNDERLINE)Objects have been removed sucessfully$(RESET)"
+	$(RM) $(OBJS_DIR)
+	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"
 
-fclean:
+fclean: clean
+	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(NAME)
-	$(RM) $(LIBFT)
-	@echo "\n*************************$(BLINK)$(GREEN)    [Success!]    $(RESET)*************************\n"
-	@echo "$(UNDERLINE)Static library and programs removed successfully$(RESET)"
+	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Static library and programs removed successfully$(RESET)    +++++++++++++++\n\n"
 
 re: fclean all
 
-.SILENT: all clean fclean re
+.SILENT:
 
 .PHONY: all clean fclean re
