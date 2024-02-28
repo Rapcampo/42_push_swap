@@ -32,7 +32,7 @@ static void	append_node(t_stack **stack, int n)
 	if (!node)
 		return ;
 	node->next = NULL;
-	node->number = n;
+	node->nbr = n;
 	if (!(*stack))
 	{
 		*stack = node;
@@ -46,7 +46,7 @@ static void	append_node(t_stack **stack, int n)
 	}
 }
 
-void	init_stack_a(t_stack **sa, char **argv)
+void	init_stack_a(t_stack **a, char **argv)
 {
 	long	n;
 	int		i;
@@ -55,12 +55,12 @@ void	init_stack_a(t_stack **sa, char **argv)
 	while (argv[1])
 	{
 		if (error_syntax(argv[1]))
-			free_error(sa);
+			free_error(a);
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_error(sa);
-		if (error_duplicate(*sa, (int)n))
-			free_error(sa);
+			free_error(a);
+		if (error_duplicate(*a, (int)n))
+			free_error(a);
 		append_node(a, (int)n);
 		i++;
 	}

@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 17:48:40 by rapcampo          #+#    #+#             */
-/*   Updated: 2024/02/21 17:49:54 by rapcampo         ###   ########.fr       */
+/*   Created: 2024/02/28 10:23:59 by rapcampo          #+#    #+#             */
+/*   Updated: 2024/02/28 10:24:42 by rapcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int main (int argc, char **argv)
+bool	stack_sorted(t_stack *stack)
 {
-	t_stack	*a;
-	t_stack	*sb;
-	int		*n_array;
-	int		size;
-
-	a = NULL;
-	sb = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (!stack)
 		return (1);
-	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	init_stack_a(&a, argv + 1);
-	if (!stack_sorted(a))
+	while (stack->next)
 	{
-		if (stack_len(a) == 2)
-			sa(&a, false);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-		 	sort_stacks(&a, &sb);
+		if (stack->nbr > stack->next->nbr)
+			return (false);
+		stack = stack->next;
 	}
-	free_stack(&a);
-	return (0);
+	return (true);
+}
 
+t_stack	*find_min(t_stack *stack)
+{
+	long	min;
+	t_stack	*min_node;
+
+	if (!stack)
+		return (NULL);
 }
