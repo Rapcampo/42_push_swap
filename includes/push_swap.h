@@ -14,11 +14,11 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include "libft/libft.h"
+# include "libft.h"
 # include <limits.h>
 # include <stdbool.h>
 
-typedef enum operations
+/*typedef enum operations
 {
 	SA,
 	SB,
@@ -32,17 +32,23 @@ typedef enum operations
 	RRB,
 	RRR
 }		t_operations;
-
+*/
 typedef struct s_stack
 {
-	int 					number;
-	int 					index;
-	int						push_cost;
-	bool					above_median;
-	bool					cheapest;
-	struct s_stack_node		*target_node;
-	struct s_stack_node		*next;
-	struct s_stack_node		*prev;
-}							t_stack_node;
+	int 			nbr;
+	int 			index;
+	int				push_cost;
+	bool			above_median;
+	bool			cheapest;
+	struct s_stack	*target_node;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+}					t_stack;
 
+// stack operations
 
+void	ra(t_stack **a, bool checker);
+void	rb(t_stack **b, bool checker);
+void	rr(t_stack **a, t_stack **b, bool checker);
+
+# endif

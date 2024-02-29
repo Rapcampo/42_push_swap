@@ -16,7 +16,7 @@ NAME	= push_swap
 LIBFT	= libft/libft.a
 SOURCE	= srcs/*.c
 OBJS	= objs/*.o
-
+DEPFLG	= -MP -MD
 # ============================ Folder Structures ===============================
 
 HEADERS		= includes/
@@ -29,7 +29,7 @@ OBJS_DIR	= objs/
 CC			= cc
 RM			= rm -rf
 AR			= ar -rcs
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra #$(DEPFLG)
 MAKE_FLAG	= --no-print-directory
 
 # =========================== Ansi Escape Codes ================================
