@@ -45,7 +45,8 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }					t_stack;
 
-// stack operations
+
+// rotate stack operations
 
 void	ra(t_stack **a, bool checker);
 void	rb(t_stack **b, bool checker);

@@ -47,5 +47,5 @@ void	ss(t_stack **a, t_stack **b, bool checker)
 	swap(a);
 	swap(b);
 	if (!checker)
-		write(1, "sa\n", 3);
+		write(1, "ss\n", 3);
 }

@@ -15,8 +15,6 @@ int main (int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*sb;
-	int		*n_array;
-	int		size;
 
 	a = NULL;
 	sb = NULL;
@@ -24,7 +22,7 @@ int main (int argc, char **argv)
 		return (1);
 	else if (argc == 2)
 		argv = ft_split(argv[1], ' ');
-	init_stack_a(&a, argv + 1);
+	init_stack(&a, argv + 1);
 	if (!stack_sorted(a))
 	{
 		if (stack_len(a) == 2)
@@ -32,9 +30,8 @@ int main (int argc, char **argv)
 		else if (stack_len(a) == 3)
 			sort_three(&a);
 		else
-		 	sort_stacks(&a, &sb);
+		 	push_swap(&a, &sb);
 	}
 	free_stack(&a);
 	return (0);
-
 }
