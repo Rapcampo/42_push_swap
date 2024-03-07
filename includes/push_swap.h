@@ -36,8 +36,9 @@
 typedef struct s_stack
 {
 	int 			nbr;
-	int 			index;
+	int 			current_index;
 	int				push_cost;
+	int				final_index;
 	bool			above_median;
 	bool			cheapest;
 	struct s_stack	*target_node;

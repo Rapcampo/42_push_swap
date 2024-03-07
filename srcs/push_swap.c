@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdbool.h>
 
 static void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
@@ -62,7 +61,7 @@ void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
 		rotate_both(a, b, cheapest_node);
 	else if (!(cheapest_node->above_median)
 			&& !(cheapest_node->target_node->above_median))
-		reverse_rotate_both(a, b, cheapeast_node);
+		reverse_rotate_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target_node, 'a');
 	pa(a, b, false);
