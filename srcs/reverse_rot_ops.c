@@ -18,10 +18,10 @@ static	void	reverse_rotate(t_stack **stack)
 	int		len;
 
 	len = stack_len(*stack);
-	if (*stack == NULL || stack == NULL || len = 1)
+	if (*stack == NULL || stack == NULL || len == 1)
 		return ;
-	last = where_last_node(*stack);
-	last->prev->next == NULL;
+	last = find_last_node(*stack);
+	last->prev->next = NULL;
 	last->next = *stack;
 	last->prev = NULL;
 	*stack = last;

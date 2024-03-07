@@ -21,31 +21,6 @@ static long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-static void	append_node(t_stack **stack, int n)
-{
-	t_stack	*node;
-	t_stack *last_node;
-
-	if (!stack)
-		return ;
-	node = malloc(sizeof(t_stack));
-	if (!node)
-		return ;
-	node->next = NULL;
-	node->nbr = n;
-	if (!(*stack))
-	{
-		*stack = node;
-		node->prev = NULL;
-	}
-	else
-	{
-		last_node = find_last(*stack);
-		last_node->next = node;
-		node->prev = last_node;
-	}
-}
-
 void	init_stack(t_stack **a, char **argv, bool flag_argc_2)
 {
 	long	n;
@@ -55,12 +30,12 @@ void	init_stack(t_stack **a, char **argv, bool flag_argc_2)
 	while (argv[1])
 	{
 		if (error_syntax(argv[1]))
-			free_error(a, argv, flag_argc_2);
+			error_free(a, argv, flag_argc_2);
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_error(a, argv, flag_argc_2);
+			error_free(a, argv, flag_argc_2);
 		if (error_repetition(*a, (int)n))
-			free_error(a, argv, flag_argc_2);
+			error_free(a, argv, flag_argc_2);
 		append_node(a, (int)n);
 		i++;
 	}
