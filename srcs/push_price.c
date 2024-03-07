@@ -67,7 +67,7 @@ void	set_price(t_stack *a, t_stack *b)
 	int	len_b;
 
 	len_a = stack_len(a);
-	len_a = stack_len(b);
+	len_b = stack_len(b);
 	while (b)
 	{
 		b->push_cost = b->current_index;
