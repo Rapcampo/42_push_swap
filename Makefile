@@ -52,9 +52,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
-	make $(MAKE_FLAG) -C $(LIBFT_DIR)
+#	make $(MAKE_FLAG) -C $(LIBFT_DIR)
 	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
-	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -I $(HEADERS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -I $(HEADERS)
 	echo "\n*************************$(GREEN)$(BLINK)    [Compilation Sucessfull!]    $(RESET)*************************\n"
 
 $(OBJS): 
@@ -70,7 +70,7 @@ clean:
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"
 
 fclean: clean
-	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
+#	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Static library and programs removed successfully$(RESET)    +++++++++++++++\n\n"
 

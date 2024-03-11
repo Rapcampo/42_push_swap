@@ -4,20 +4,25 @@ static long	ft_atol(const char *str)
 {
 	long	result;
 	int		sign;
-
+	int		i;
+	
+	i = 0;
 	result = 0;
 	sign = 1;
 	while (*str == ' ' || *str == '\t' || *str == '\n' || 
 			*str == '\r' || *str == '\f' || *str == '\v')
-		str++;
+		i++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
 			sign = -1;
-		str++;
+		i++;
 	}
-	while (ft_isdigit(*str))
-		result = result * 10 + (*str++ - '0');
+	while (str[i] >= 0 && str[i] <= 9)
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
 	return (result * sign);
 }
 
