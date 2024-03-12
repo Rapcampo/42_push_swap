@@ -1,91 +1,126 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_ops.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 20:01:55 by rapcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 20:52:57 by rapcampo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/push_swap.h"
 
-static void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+int			main(int argc, char **argv);
+static long	*ft_nbr_split(char *str);
+static long *ft_split_array(int len, char **array);
+static int	check_input(int len, char **array);
+static void	sort(t_list **a, t_list **b);
+
+int	main(int argc, char **argv)
 {
-	while (*a != cheapest_node->target_node
-			&& *b != cheapest_node)
-		rr(a, b, false);
-	set_current_position(*a);
-	set_current_position(*b);
-}
+	long *numbers;
+	t_list *a;
+	t_list *b;
 
-static void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
-{
-	while (*a != cheapest_node->target_node
-			&& *b != cheapest_node)
-		rr(a, b, false);
-	set_current_position(*a);
-	set_current_position(*b);
-}
-
-void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
-{
-	while (*stack != top_node)
-	{
-		if (stack_name == 'a')
-		{
-			if (top_node->above_median)
-				ra(stack, false);
-			else
-			 	rra(stack, false);
-		}
-		else if (stack_name == 'b')
-		{
-			if (top_node->above_median)
-				rb(stack, false);
-			else
-			 	rrb(stack, false);
-		}
-	}
-}
-
- static void	move_nodes(t_stack **a, t_stack **b)
-{
-	t_stack	*cheapest_node;
-
-	cheapest_node = return_cheapest(*b);
-	if (cheapest_node->above_median
-			&& cheapest_node->target_node->above_median)
-		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median)
-			&& !(cheapest_node->target_node->above_median))
-		reverse_rotate_both(a, b, cheapest_node);
-	finish_rotation(b, cheapest_node, 'b');
-	finish_rotation(a, cheapest_node->target_node, 'a');
-	pa(a, b, false);
-}
-
-void	push_swap(t_stack **a, t_stack **b)
-{
-	t_stack	*smallest;
-	int		len_a;
-
-	len_a = stack_len(*a);
-	while (len_a-- > 3)
-		pb(b, a, false);
-	while (*b)
-	{
-		init_nodes(*a, *b);
-		move_nodes(a, b);
-	}
-	set_current_position(*a);
-	smallest = find_smallest(*a);
-	if (smallest->above_median)
-		while (*a != smallest)
-			ra(a, false);
+	a = NULL;
+	b = NULL;
+	if (argc < 2)
+		exit (0);
+	else if (argc == 2)
+		numbers = ft_nbr_split(argv[1]);
 	else
-	 	while(*a != smallest)
-			rra(a, false);
+		numbers = ft_split_array(argc - 1, &argv[1]);
+	if (!numbers)
+		write (2, "Error\n", 6);
+	else
+	 a = init_stack(numbers);
+	if (!a)
+		return (0);
+	if (!check_sort(a, 'a'))
+		sort(&a, &b);
+	free_list(a);
+	free_list(b);
+}
+
+long	*ft_nbr_split(char *str)
+{
+	long	*numbers;
+	ssize_t	i;
+	char **array;
+
+	array = ft_split(str, ' ');
+	if (!array)
+		return (NULL);
+	if (!array_len(array))
+	{
+		free(array);
+		return (NULL);
+	}
+	numbers = ft_split_array(array_len(array), array);
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+	return (numbers);
+}
+
+static long	*ft_split_array(int len, char **array)
+{
+	long	*numbers;
+	ssize_t	i;
+	if (!check_input(len, array))
+		return (NULL);
+	numbers = (long *)ft_calloc(sizeof(long), len + 1);
+	if (!numbers)
+		return (NULL);
+	numbers[0] = len;
+	i = -1;
+	while (array[++i])
+		numbers[i + 1] = ft_atol(array[i]);
+	i = 0;
+	while (++i <= numbers[0])
+	{
+		if (numbers[i] > INT_MAX || numbers[i] < INT_MIN
+				|| check_duplicate(numbers[i], numbers))
+		{
+			free(numbers);
+			return (NULL);
+		}
+	}
+	return (numbers);
+}
+
+static int	check_input(int len, char **array)
+{
+	ssize_t	i;
+	ssize_t	j;
+
+	i = -1;
+	while (++i < len)
+	{
+		j = -1;
+		if ((array[i][0] == '-' || array[i][0] == '+') && array[i][1])
+			j++;
+		while (array[i][++j])
+			if (array[i][j] < '0' || array[i][j] > '9')
+				return (0);
+		if (j > 11)
+			return (0);
+	}
+	return (1);
+}
+
+static void	sort(t_list **a, t_list **b)
+{
+	size_t	size;
+
+	size = count_list(*a);
+	while (*a && size > 5)
+	{
+		op_list(a, b, "pb");
+		if ((*b)->r_v <= (size / 2))
+			op_list(a, b, "rb");
+	}
+	while (count_list(*a) > 3)
+		op_list(a, b, "pb");
+	if (*a)
+		sort_three(a, 'a');
+	else
+	 op_list(a, b, "pa");
+	while (*b)
+		transfer_cheap(a, b, (int)count_list(*a), (int)count_list(*b));
+	while (find_next(*a, (int)size, -1, 0) > 0)
+		op_list(a, b, "ra");
+	while (find_next(*a, (int)size, -1, 0) < 0)
+		op_list(a, b, "rra");
 }
