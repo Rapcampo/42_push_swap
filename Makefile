@@ -64,7 +64,7 @@ $(OBJS):
 	mv *.o $(OBJS_DIR)
 
 clean:
-	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
+#	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_DIR)
 	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"

@@ -1,5 +1,4 @@
 #include "../includes/push_swap.h"
-#include <stddef.h>
 
 char			**ft_split(char const *s, char c);
 static size_t	ft_count_words(char const *s, char c);
