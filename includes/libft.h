@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
+# include "../libft/includes/ft_printf.h"
 
 //typedef struct for bonus//
 
@@ -64,6 +65,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+size_t	ft_strspn(char const *str, char const *accept);
 
 //bonus functions//
 
@@ -77,4 +79,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstlast(t_list *lst);
 
+// special split
+
+char	**ft_split_mult(char *str, char *charset);
 #endif

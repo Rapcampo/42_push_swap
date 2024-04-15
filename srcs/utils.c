@@ -1,81 +1,71 @@
-#include "../includes/push_swap.h"
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/06 01:37:01 by rapcampo          #+#    #+#             */
+/*   Updated: 2024/04/06 01:55:09 by rapcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	array_len(char **array);
-size_t	str_len(char *str);
-long	ft_atol(char *nptr);
-int		ft_strcmp(const char *str1, const char *str2);
+#include "push_swap.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_min(int a, int b);
+int	ft_max(int a, int b);
+int	get_start_stack(t_elem *stack);
+int	get_end_stack(t_elem *stack);
+int	is_median(t_elem *stack, int num);
+
+int	ft_min(int a, int b)
 {
-	void	*ret;
-	
-	size = nmemb * size;
-	ret = malloc(size);
-	if (!ret)
-		return (NULL);
-	while (size)
-		((char *)ret)[--size] = 0;
-	return (ret);
+	if (a <= b)
+		return (a);
+	return (b);
 }
 
-size_t	array_len(char **array)
+int	ft_max(int a, int b)
 {
-	size_t	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
+	if (a >= b)
+		return (a);
+	return (b);
 }
 
-size_t	str_len(char *str)
+int	get_start_stack(t_elem *stack)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	auto int	first = 0;
+	while (stack[first].filled != 1)
+		first++;
+	if (stack[first].index == -1)
+		first--;
+	return (first);
 }
 
-long	ft_atol(char *nptr)
+int get_end_stack(t_elem *stack)
 {
-	size_t	n;
-	int		i;
-	int		negative;
+	auto int	end = 0;
+	while (stack[end].index != -1)
+		end++;
+	end--;
+	return (end);
+}
 
-	n = 0;
-	i = 0;
-	negative = 1;
-	if (nptr[i] == '-' || nptr[i] == '+')
+int	is_median(t_elem *stack, int num)
+{
+	auto int	start = get_start_stack(stack);
+	auto int	end = get_end_stack(stack);
+	auto int	higher = 0;
+	auto int	lower = 0;
+	while (start <= end)
 	{
-		if (nptr[i] == '-')
-			negative = -1;
-		i++;
+		if (stack[start].num > num)
+			higher++;
+		else if (stack[start].num < num)
+			lower++;
+		start++;
 	}
-	while (nptr[i])
-	{
-		if (nptr[i] >= '0' && nptr[i] <= '9')
-			n = (n * 10) + (nptr[i] - 48);
-		else
-			break;
-		i++;
-	}
-	return (n * negative);
-}
-
-int	ft_strcmp(const char *str1, const char *str2)
-{
-	size_t i;
-
-	i = 0;
-	while (str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-		i++;
-	}
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	if ((higher - lower) >= -1 && (higher - lower) <= 1)
+		return (1);
+	return (0);
 }

@@ -13,25 +13,26 @@
 # ================================= Files ======================================
 
 NAME	= push_swap
-LIBFT	= libft/libft.a
+LIBFT	= -L ./libft
 SOURCE	= srcs/*.c
 OBJS	= objs/*.o
 DEPFLG	= -MP -MD
+
 # ============================ Folder Structures ===============================
 
-HEADERS		= includes/
-SOURCE_DIR	= srcs/
-LIBFT_DIR	= libft/
-OBJS_DIR	= objs/
+HEADERS		= includes
+SOURCE_DIR	= srcs
+LIBFT_DIR	= libft
+OBJS_DIR	= objs
 
 # ============================ Commands & Flags ===============================
 
 CC			= cc
 RM			= rm -rf
 AR			= ar -rcs
-FLAGS		= -Wall -Werror -Wextra #$(DEPFLG)
+FLAGS		= -Wall -Werror -Wextra -I$(HEADERS) -g #$(DEPFLG)
 MAKE_FLAG	= --no-print-directory
-
+LDLIBS		= -lft
 # =========================== Ansi Escape Codes ================================
 
 ULINE	= \e[4m
@@ -52,27 +53,27 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)libft$(RESET)"
-#	make $(MAKE_FLAG) -C $(LIBFT_DIR)
+	make $(MAKE_FLAG) -C $(LIBFT_DIR)
 	echo "[$(CYAN)$(BLINK)Linking...$(RESET)]"
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -I $(HEADERS)
+	$(CC) $(FLAGS) $(LIBFT) -o $@ $^ $(LDLIBS) 
 	echo "\n*************************$(GREEN)$(BLINK)    [Compilation Sucessfull!]    $(RESET)*************************\n"
 
 $(OBJS): 
 	echo "[$(PURPLE)$(BLINK)Compiling...$(RESET)] $(YELLOW)sources$(RESET)"
 	mkdir -p objs
-	$(CC) $(FLAGS) -c $(SOURCE) -I $(HEADERS)
+	$(CC) $(FLAGS) -c $(SOURCE)
 	mv *.o $(OBJS_DIR)
 
 clean:
-#	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
+	make clean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_DIR)
-	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"
+	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)PushSwap Objects have been removed sucessfully$(RESET)    +++++++++++++++\n\n"
 
 fclean: clean
-#	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
+	make fclean $(MAKE_FLAG) -C $(LIBFT_DIR)
 	$(RM) $(NAME)
-	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)Static library and programs removed successfully$(RESET)    +++++++++++++++\n\n"
+	echo "\n\n++++++++++++++    $(ULINE)$(GREEN)PushSwap Static library and programs removed successfully$(RESET)    +++++++++++++++\n\n"
 
 re: fclean all
 
