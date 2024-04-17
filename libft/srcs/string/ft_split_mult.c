@@ -14,7 +14,7 @@
 
 static int	ft_is_sep(char c, char *sep)
 {
-	auto int	i = 0;
+	auto int i = 0;
 	while (sep[i])
 	{
 		if (sep[i] == c)
@@ -26,7 +26,7 @@ static int	ft_is_sep(char c, char *sep)
 
 static int	ft_usep(char *str, char *sep)
 {
-	auto int	i = 1;
+	auto int i = 1;
 	while (ft_is_sep(str[i], sep) == 0 && str[i])
 		i++;
 	return (i);
@@ -34,9 +34,9 @@ static int	ft_usep(char *str, char *sep)
 
 static int	ft_count_malloc(char *str, char *sep)
 {
-	auto int	numsep = 0;
-	auto int	check = 1;
-	auto int	i = 0;
+	auto int numsep = 0;
+	auto int check = 1;
+	auto int i = 0;
 	while (str[i])
 	{
 		if (check == 0 && ft_is_sep(str[i], sep))
@@ -48,7 +48,7 @@ static int	ft_count_malloc(char *str, char *sep)
 			check = 0;
 			numsep++;
 		}
-		else 
+		else
 			i++;
 	}
 	return (numsep);
@@ -56,7 +56,7 @@ static int	ft_count_malloc(char *str, char *sep)
 
 static void	*ft_free(char **split, int k)
 {
-	auto int	i = 0;
+	auto int i = 0;
 	while (i < k)
 	{
 		free(split[i]);
@@ -70,10 +70,10 @@ char	**ft_split_mult(char *str, char *charset)
 {
 	int	j;
 
-	auto int	numsep = ft_count_malloc(str, charset);
-	auto char	**split = malloc(sizeof(char *) * (numsep + 1));
-	auto int	i = 0;
-	auto int	k = -1;
+	auto int numsep = ft_count_malloc(str, charset);
+	auto char **split = malloc(sizeof(char *) * (numsep + 1));
+	auto int i = 0;
+	auto int k = -1;
 	while (++k < numsep)
 	{
 		j = -1;

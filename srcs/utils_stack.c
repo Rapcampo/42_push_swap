@@ -22,7 +22,7 @@ t_elem	*create_tab(int argc, char **argv, int boolean)
 {
 	t_elem	*tab;
 
-	auto int	i = 0;
+	auto int i = 0;
 	tab = malloc(sizeof(t_elem) * (argc + 1));
 	if (!tab)
 		return (NULL);
@@ -47,9 +47,9 @@ t_elem	*create_tab(int argc, char **argv, int boolean)
 
 t_elem	get_min_stack(t_elem *stack)
 {
-	auto int	start = get_start_stack(stack);
-	auto int	end = get_end_stack(stack);
-	auto int	min = stack[start].index;
+	auto int start = get_start_stack(stack);
+	auto int end = get_end_stack(stack);
+	auto int min = stack[start].index;
 	while (start <= end)
 	{
 		if (stack[start].num < stack[min].num)
@@ -61,12 +61,14 @@ t_elem	get_min_stack(t_elem *stack)
 
 t_elem	get_max_stack(t_elem *stack, int threshold)
 {
-	auto int	start = get_start_stack(stack);
-	auto int	end = get_end_stack(stack);
-	auto int	max = -1;
+	auto int start = get_start_stack(stack);
+	auto int end = get_end_stack(stack);
+	auto int max = -1;
 	while (start <= end)
 	{
-		if (max == -1 || ((stack[start].num > stack[max].num || stack[max].filled == -1) && (threshold == -1 || stack[start].num < threshold)))
+		if (max == -1 || ((stack[start].num > stack[max].num
+					|| stack[max].filled == -1) && (threshold == -1
+					|| stack[start].num < threshold)))
 			max = stack[start].index;
 		start++;
 	}
@@ -75,12 +77,13 @@ t_elem	get_max_stack(t_elem *stack, int threshold)
 
 t_elem	get_min_above_thresh(t_elem *stack, int threshold)
 {
-	auto int	start = get_start_stack(stack);
-	auto int	end = get_end_stack(stack);
-	auto int	min = -1;
+	auto int start = get_start_stack(stack);
+	auto int end = get_end_stack(stack);
+	auto int min = -1;
 	while (start <= end)
 	{
-		if (stack[start].num > threshold && (min == -1 || stack[start].num < stack[min].num))
+		if (stack[start].num > threshold
+			&& (min == -1 || stack[start].num < stack[min].num))
 			min = stack[start].index;
 		start++;
 	}
@@ -91,8 +94,8 @@ t_elem	get_min_above_thresh(t_elem *stack, int threshold)
 
 int	is_sorted(t_elem *stack)
 {
-	auto int	i = 0;
-	while(stack[i + 1].index != -1)
+	auto int i = 0;
+	while (stack[i + 1].index != -1)
 	{
 		if (stack[i].num > stack[i + 1].num)
 			return (-1);

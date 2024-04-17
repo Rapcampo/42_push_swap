@@ -20,8 +20,8 @@ void	ft_double_shift(t_elem *stack_a, t_elem *stack_b, int down_up);
 
 void	push_stack(t_elem *stack_a, t_elem *stack_b, char *op)
 {
-	auto int	first = 0;
-	auto int	end = 0;
+	auto int first = 0;
+	auto int end = 0;
 	while (stack_a[first].filled != 1)
 		first++;
 	while (stack_b[end].index != -1 && stack_b[end].filled != 1)
@@ -40,8 +40,8 @@ void	shift_up(t_elem *stack, char *op)
 	int	temp;
 	int	temp2;
 
-	auto int	start = 0;
-	auto int	end = 0;
+	auto int start = 0;
+	auto int end = 0;
 	while (stack[start].index != -1 && stack[start].filled != 1)
 		start++;
 	while (stack[end].index != -1)
@@ -66,8 +66,8 @@ void	shift_down(t_elem *stack, char *op)
 	int	temp;
 	int	temp2;
 
-	auto int	start = 0;
-	auto int	end = 0;
+	auto int start = 0;
+	auto int end = 0;
 	while (stack[start].index != -1 && stack[start].filled != 1)
 		start++;
 	while (stack[end].index != -1)
@@ -88,7 +88,7 @@ void	shift_down(t_elem *stack, char *op)
 
 void	ft_swap(t_elem *stack, char *op)
 {
-	auto int	start = get_start_stack(stack);
+	auto int start = get_start_stack(stack);
 	stack[start].num ^= stack[start + 1].num;
 	stack[start + 1].num ^= stack[start].num;
 	stack[start].num ^= stack[start + 1].num;

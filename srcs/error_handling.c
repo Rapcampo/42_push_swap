@@ -21,8 +21,8 @@ long	ft_atol(char *nptr);
 long	ft_atol(char *nptr)
 {
 	auto long nbr = 0;
-	auto int	i = 0;
-	auto int	neg = 1;
+	auto int i = 0;
+	auto int neg = 1;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
@@ -44,17 +44,17 @@ int	is_args_number(int argc, char **argv)
 {
 	int	j;
 
-	auto int	i = 0;
+	auto int i = 0;
 	while (i < argc - 1)
 	{
 		j = 0;
-		if (!(argv[i][0] == '+' || argv[i][0] == '-' 
-					|| (argv[i][0] >= '0' && argv[i][0] <= '9')))
+		if (!(argv[i][0] == '+' || argv[i][0] == '-'
+			|| (argv[i][0] >= '0' && argv[i][0] <= '9')))
 			return (-1);
 		while (argv[i][j])
 		{
-			if ((argv[i][j] == '+' || argv[i][j] == '-') 
-					&& (ft_isdigit(argv[i][j + 1] == 0) || !argv[i][j + 1]))
+			if ((argv[i][j] == '+' || argv[i][j] == '-')
+				&& (ft_isdigit(argv[i][j + 1] == 0) || !argv[i][j + 1]))
 				return (-1);
 			if (ft_isdigit(argv[i][j] == 0 && (argv[i][j])))
 				return (-1);
@@ -74,7 +74,7 @@ int	is_duplicate(int argc, char **argv)
 		if (ft_atol(argv[0]) > INT_MAX || ft_atol(argv[0]) < INT_MIN)
 			return (-1);
 	}
-	auto int	i = -1;
+	auto int i = -1;
 	while (++i < argc - 1)
 	{
 		j = i + 1;
@@ -104,6 +104,5 @@ int	ft_handle_errors(int argc, char **argv)
 		ft_putstr_fd("Error\n", 2);
 		return (-1);
 	}
-
-		return (1);
+	return (1);
 }

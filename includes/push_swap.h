@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rapcampo <rapcampo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/17 17:07:29 by rapcampo          #+#    #+#             */
+/*   Updated: 2024/04/17 17:07:32 by rapcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -39,4 +51,4 @@ int		is_sorted(t_elem *stack);
 int		is_median(t_elem *stack, int num);
 long	ft_atol(char *nptr);
 
-# endif
+#endif
