@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 int		is_args_number(int argc, char **argv);
 int		is_duplicate(int argc, char **argv);
