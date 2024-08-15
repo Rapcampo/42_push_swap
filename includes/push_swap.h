@@ -17,8 +17,14 @@
 //# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# define INT_MAX 2147483647 
-# define INT_MIN -2147483648 
+
+# ifndef INT_MAX
+#  define INT_MAX 2147483647
+# endif
+
+# ifndef INT_MIN
+#  define INT_MIN -2147483648 
+# endif
 
 typedef struct s_elem
 {
